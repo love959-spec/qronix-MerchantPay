@@ -215,7 +215,7 @@ function loginShell(inner) {
   return `<div class="login-wrap">
       <div class="brand">
         <img class="corp-logo" src="qronix-logo.png" alt="Qronix" />
-        <div class="logo">₩</div><h1>MerchantPay</h1><p>가맹점 결제 단말 · 데모</p>
+        <h1>MerchantPay</h1>
       </div>
       <div class="login-card">${inner}</div>
     </div>`;
