@@ -1035,7 +1035,7 @@ function remitSend(kind) {
         <div class="section-title">고객에게 전송된 ${isKakao ? '알림톡' : '문자'} 미리보기</div>
         ${preview}
         <div class="btn-row">
-          <button class="btn ghost" onclick="window.open('${payUrl}','_blank')">결제창 미리보기</button>
+          <button class="btn ghost" onclick="window.open('${payUrl}','_blank','noopener')">결제창 미리보기</button>
           <button class="btn" onclick="go('/main')">홈으로</button>
         </div>
         <div class="note">데모에서는 실제 발송 대신 미리보기를 표시합니다. '결제창 미리보기'로 고객 결제 화면을 확인할 수 있습니다.</div>
