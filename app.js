@@ -1,5 +1,5 @@
 /* =========================================================
-   PayMerchant — 가맹점 결제 App (데모)
+   MerchantPay — 가맹점 결제 App (데모)
    순수 바닐라 JS SPA (해시 라우팅 + localStorage 목 백엔드)
    ========================================================= */
 
@@ -146,7 +146,7 @@ function updateBottomNav(path) {
     const item = (t) =>
       `<button class="sb-item ${active(t.path)}" onclick="go('${t.path}')"><span class="sb-ic">${t.icon}</span><span>${esc(t.label)}</span></button>`;
     sb.innerHTML =
-      `<div class="sb-brand"><div class="sb-logo">₩</div><div class="sb-info"><div class="sb-title">PayMerchant</div><div class="sb-store">${esc(cfg.storeName)}</div></div></div>` +
+      `<div class="sb-brand"><div class="sb-logo">₩</div><div class="sb-info"><div class="sb-title">MerchantPay</div><div class="sb-store">${esc(cfg.storeName)}</div></div></div>` +
       `<nav class="sb-list">${BOTTOM_TABS.map(item).join('')}<div class="sb-div"></div>${SIDE_MORE.map(item).join('')}` +
       `<button class="sb-item sb-logout" onclick="doLogout()"><span class="sb-ic">⎋</span><span>로그아웃</span></button></nav>`;
     sb.classList.remove('hidden');
@@ -213,7 +213,10 @@ let pendingSecret = null; // OTP 등록 중 임시 시크릿
 
 function loginShell(inner) {
   return `<div class="login-wrap">
-      <div class="brand"><div class="logo">₩</div><h1>PayMerchant</h1><p>가맹점 결제 단말 · 데모</p></div>
+      <div class="brand">
+        <img class="corp-logo" src="qronix-logo.png" alt="Qronix" />
+        <div class="logo">₩</div><h1>MerchantPay</h1><p>가맹점 결제 단말 · 데모</p>
+      </div>
       <div class="login-card">${inner}</div>
     </div>`;
 }
@@ -275,8 +278,8 @@ function renderOtpStep() { if (hasTotp()) renderOtpEntry(); else renderOtpSetup(
 
 function renderOtpSetup() {
   pendingSecret = randomBase32(16);
-  const label = encodeURIComponent('PayMerchant:' + (pendingUser || 'user'));
-  const uri = `otpauth://totp/${label}?secret=${pendingSecret}&issuer=PayMerchant&algorithm=SHA1&digits=6&period=30`;
+  const label = encodeURIComponent('MerchantPay:' + (pendingUser || 'user'));
+  const uri = `otpauth://totp/${label}?secret=${pendingSecret}&issuer=MerchantPay&algorithm=SHA1&digits=6&period=30`;
   app.innerHTML = loginShell(`
     <h2>구글 OTP 등록</h2>
     <p style="font-size:13px;color:var(--muted);margin:0 0 12px">Google Authenticator(구글 OTP) 앱에서 아래 QR을 스캔하거나 설정키를 입력해 계정을 추가하세요.</p>
@@ -404,7 +407,7 @@ async function webauthnRegister() {
   const cred = await navigator.credentials.create({
     publicKey: {
       challenge: randBytes(32),
-      rp: { name: 'PayMerchant', id: location.hostname },
+      rp: { name: 'MerchantPay', id: location.hostname },
       user: { id: randBytes(16), name: cfg.userId, displayName: cfg.userId },
       pubKeyCredParams: [{ type: 'public-key', alg: -7 }, { type: 'public-key', alg: -257 }],
       authenticatorSelection: { authenticatorAttachment: 'platform', userVerification: 'required', residentKey: 'preferred' },
@@ -708,7 +711,7 @@ route('/main', () => {
   const total = todays.reduce((s, t) => s + t.amount, 0);
 
   app.innerHTML = `
-    ${appbar('PayMerchant', { menu: true })}
+    ${appbar('MerchantPay', { menu: true })}
     <div class="screen">
       <div class="hero">
         <div class="store">${esc(cfg.storeName)}</div>
