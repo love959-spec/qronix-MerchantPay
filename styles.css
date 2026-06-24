@@ -209,14 +209,16 @@ input, select { font-family: inherit; font-size: 16px; }
   box-shadow: 0 -2px 12px rgba(40,45,80,.06);
 }
 .bottomnav .bn-item {
-  flex: 1; min-width: 0; background: none; padding: 8px 2px 9px; display: flex; flex-direction: column;
-  align-items: center; gap: 3px; color: var(--muted); font-size: 10px; font-weight: 600;
+  flex: 1; min-width: 0; background: none;
+  padding: clamp(7px, 1.7vw, 12px) 2px clamp(8px, 1.8vw, 13px); display: flex; flex-direction: column;
+  align-items: center; gap: clamp(2px, 0.6vw, 5px); color: var(--muted);
+  font-size: clamp(9.5px, 2.7vw, 13px); font-weight: 600;
 }
 .bottomnav .bn-item .bn-lb { white-space: nowrap; }
-.bottomnav .bn-item .bn-ic { font-size: 20px; line-height: 1; }
+.bottomnav .bn-item .bn-ic { font-size: clamp(19px, 5vw, 26px); line-height: 1; }
 .bottomnav .bn-item.active { color: var(--primary); }
 .bottomnav .bn-item:active { background: var(--bg); }
-body.has-bottomnav #app .screen { padding-bottom: calc(80px + var(--safe-bottom)); }
+body.has-bottomnav #app .screen { padding-bottom: calc(clamp(72px, 15vw, 94px) + var(--safe-bottom)); }
 
 /* ---------- 사이드바 (데스크톱 전용) ---------- */
 .sidebar {
@@ -240,6 +242,8 @@ body.has-bottomnav #app .screen { padding-bottom: calc(80px + var(--safe-bottom)
 /* ---------- 반응형: 태블릿 ---------- */
 @media (min-width: 700px) {
   #app { max-width: 700px; }
+  .bottomnav { max-width: 700px; }            /* 하단바 폭을 콘텐츠 폭에 맞춤 */
+  .bottomnav .bn-item { padding-top: 11px; padding-bottom: 12px; }
   .menu-grid { grid-template-columns: repeat(4, 1fr); }
   .login-card { max-width: 420px; margin-left: auto; margin-right: auto; }
   .keypad { max-width: 380px; margin: 0 auto; }
